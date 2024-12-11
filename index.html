@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WilowCoin - Quantum Future</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
+        
+        :root {
+            --neon-blue: #00f7ff;
+            --dark-bg: #030711;
+            --glow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue), 0 0 30px var(--neon-blue);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, rgba(0,0,0,0.92), rgba(0,0,0,0.96)),
+                repeating-linear-gradient(
+                    transparent,
+                    transparent 50px,
+                    rgba(0, 247, 255, 0.1) 50px,
+                    rgba(0, 247, 255, 0.1) 51px
+                );
+            animation: scan 10s linear infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes scan {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100px; }
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 2rem;
+            border-bottom: 2px solid var(--neon-blue);
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            color: var(--neon-blue);
+            text-shadow: var(--glow);
+            animation: pulse 2s infinite;
+            margin-bottom: 1rem;
+        }
+
+        header p {
+            color: #ffffff;
+            font-size: 1.2rem;
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        @keyframes pulse {
+            0% { text-shadow: var(--glow); }
+            50% { text-shadow: 0 0 20px var(--neon-blue), 0 0 40px var(--neon-blue); }
+            100% { text-shadow: var(--glow); }
+        }
+
+        nav {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        nav a {
+            color: var(--neon-blue);
+            text-decoration: none;
+            margin: 0 1.5rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav a:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        section {
+            padding: 4rem 2rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--neon-blue);
+            text-shadow: var(--glow);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .section-description {
+            text-align: center;
+            color: #ffffff;
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+            text-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
+        }
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+
+        .image-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 2px solid var(--neon-blue);
+            border-radius: 15px;
+            box-shadow: var(--glow);
+            pointer-events: none;
+            animation: borderPulse 2s infinite;
+        }
+
+        @keyframes borderPulse {
+            0% { box-shadow: var(--glow); }
+            50% { box-shadow: 0 0 20px var(--neon-blue), 0 0 40px var(--neon-blue); }
+            100% { box-shadow: var(--glow); }
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+            display: block;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.02);
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(0, 247, 255, 0.1), transparent);
+            pointer-events: none;
+            border-radius: 12px;
+        }
+
+        #features ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        #features li {
+            background: rgba(0, 247, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--neon-blue);
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        #features li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
+
+        #contact {
+            text-align: center;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            color: var(--neon-blue);
+            text-align: center;
+            padding: 1.5rem 0;
+            border-top: 2px solid var(--neon-blue);
+            margin-top: 4rem;
+        }
+
+        /* Quantum particle effect */
+        .quantum-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            animation: float 20s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: translate(100px, -100px); opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+            
+            nav a {
+                margin: 0 0.5rem;
+                padding: 0.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <style>
+        .roadmap-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--neon-blue);
+            box-shadow: var(--glow);
+            z-index: 1;
+        }
+
+        .timeline-item {
+            margin: 60px 0;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .timeline-content {
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid var(--neon-blue);
+            border-radius: 15px;
+            padding: 20px 40px;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+            z-index: 3;
+            min-width: 300px;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px var(--neon-blue);
+        }
+
+        .horizontal-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--neon-blue);
+            box-shadow: var(--glow);
+            z-index: 1;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: black;
+            box-shadow: var(--glow);
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-content {
+                padding: 15px 25px;
+                min-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="quantum-particles">
+        <div class="particle" style="left: 10%; top: 20%"></div>
+        <div class="particle" style="left: 30%; top: 50%"></div>
+        <div class="particle" style="left: 70%; top: 30%"></div>
+        <div class="particle" style="left: 90%; top: 60%"></div>
+    </div>
+
+    <header>
+        <h1>WilowCoin</h1>
+        <p>The Future of Quantum-Powered Cryptocurrency</p>
+    </header>
+
+    <nav>
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <section class="hero">
+        <h2 class="section-title">Enter the Quantum Realm</h2>
+        <p class="section-description">Inspired by Google's Quantum Breakthrough - Because Regular Memecoins Are Too Basic</p>
+        <div class="image-container">
+            <img src="images/quantum_chip.webp" alt="Quantum Chip">
+            <div class="image-overlay"></div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title">Quantum Evolution</h2>
+        <p class="section-description">The first memecoin to boldly go where no meme has gone before. Not affiliated with Google, we just think quantum stuff is neat!</p>
+        <div class="image-container">
+            <img src="images/quantum_abstract_2.jpg" alt="Quantum Abstract">
+            <div class="image-overlay"></div>
+        </div>
+    </section>
+
+    <section id="features">
+        <h2 class="section-title">Quantum Capabilities</h2>
+        <ul>
+            <li>Just Trust Us Bro Technology</li>
+            <li>Powered by Memes and Dreams</li>
+            <li>Diamond Hand Community</li>
+            <li>To The Quantum Realm!</li>
+        </ul>
+    </section>
+
+    <section id="roadmap">
+        <h2 class="section-title">Quantum Journey</h2>
+        <div class="roadmap-container">
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="step-number">1</div>
+                    <div class="timeline-content">
+                        Launch the memecoin
+                    </div>
+                </div>
+    
+                <div class="timeline-item">
+                    <div class="step-number">2</div>
+                    <div class="timeline-content">
+                        Build the community
+                    </div>
+                </div>
+    
+                <div class="timeline-item">
+                    <div class="step-number">3</div>
+                    <div class="timeline-content">
+                        More memes, more fun
+                    </div>
+                </div>
+    
+                <div class="timeline-item">
+                    <div class="step-number">4</div>
+                    <div class="timeline-content">
+                        Take over the quantum realm
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Connect with Us</h2>
+        <p class="section-description">Join the quantum revolution: support@wilowcoin.io</p>
+    </section>
+
+    <footer>
+        &copy; 2024 WilowCoin - Quantum Future Awaits
+    </footer>
+</body>
+</html>
